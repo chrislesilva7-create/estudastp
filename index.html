@@ -1,136 +1,137 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <title>EstudaSTP - Matemática 12º Ano</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1, h2, h3 { color: #2c3e50; }
-    .menu { margin-bottom: 20px; }
-    .menu button { margin-right: 10px; padding: 10px 15px; cursor: pointer; }
-    .content { margin-top: 20px; }
-    .exercise { margin-top: 15px; }
-    .resultado { margin-top: 10px; font-weight: bold; color: #e74c3c; }
-    input { padding:5px; margin-right:5px;}
-    button.solve { margin-top:5px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EstudaSTP - Matemática 12.º Ano</title>
+<style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
+    header { background:#4CAF50; color:white; padding:20px; text-align:center; }
+    nav { background:#333; display:flex; justify-content:center; }
+    nav a { color:white; padding:14px 20px; text-decoration:none; display:block; }
+    nav a:hover { background:#575757; }
+    section { padding:20px; max-width:800px; margin:auto; }
+    h2 { color:#4CAF50; }
+    .exercise { background:white; padding:15px; margin:15px 0; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    input[type=text] { width:50px; }
+    button { padding:5px 10px; margin-left:5px; }
+    #resultadoTeste { margin-top:15px; font-weight:bold; }
+</style>
 </head>
 <body>
 
-<h1>EstudaSTP - Matemática 12.º Ano</h1>
+<header>
+    <h1>EstudaSTP - Matemática 12.º Ano</h1>
+</header>
 
-<div class="menu">
-  <button onclick="showContent('conteudos')">Conteúdos</button>
-  <button onclick="showContent('exercicios')">Exercícios</button>
-  <button onclick="showContent('teste')">Simulação de Teste</button>
-</div>
+<nav>
+    <a href="#conteudos">Conteúdos</a>
+    <a href="#exercicios">Exercícios</a>
+    <a href="#simulacao">Simulação de Teste</a>
+</nav>
 
-<div class="content" id="mainContent">
-  <p>Bem-vindo ao EstudaSTP! Clique nos botões acima para começar a estudar.</p>
-</div>
+<section id="conteudos">
+    <h2>Conteúdos</h2>
+    <p><strong>Álgebra:</strong> Equações quadráticas, factorização, progressões</p>
+    <p><strong>Funções:</strong> Zeros de funções, funções lineares e quadráticas, gráficos</p>
+    <p><strong>Limites:</strong> Limites simples, indeterminações, continuidade</p>
+</section>
+
+<section id="exercicios">
+    <h2>Exercícios Interativos</h2>
+
+    <div class="exercise">
+        <p>Álgebra: Resolva x² - 7x + 10 = 0</p>
+        <input type="text" id="ex1a" placeholder="x1"> , 
+        <input type="text" id="ex1b" placeholder="x2">
+        <button onclick="verEx1()">Ver Resolução</button>
+        <p id="res1"></p>
+    </div>
+
+    <div class="exercise">
+        <p>Funções: Zeros de f(x) = x² - 6x + 8</p>
+        <input type="text" id="ex2a" placeholder="x1"> , 
+        <input type="text" id="ex2b" placeholder="x2">
+        <button onclick="verEx2()">Ver Resolução</button>
+        <p id="res2"></p>
+    </div>
+
+    <div class="exercise">
+        <p>Limites: lim(x→3) (x²-9)/(x-3)</p>
+        <input type="text" id="ex3" placeholder="Resposta">
+        <button onclick="verEx3()">Ver Resolução</button>
+        <p id="res3"></p>
+    </div>
+</section>
+
+<section id="simulacao">
+    <h2>Simulação de Teste</h2>
+    <p>Responda às perguntas abaixo e veja o seu resultado:</p>
+
+    <div class="exercise">
+        <p>1) Resolva x² - 5x + 6 = 0</p>
+        <input type="text" id="t1a" placeholder="x1"> , 
+        <input type="text" id="t1b" placeholder="x2">
+    </div>
+
+    <div class="exercise">
+        <p>2) Zeros de f(x) = x² - 4x + 3</p>
+        <input type="text" id="t2a" placeholder="x1"> , 
+        <input type="text" id="t2b" placeholder="x2">
+    </div>
+
+    <div class="exercise">
+        <p>3) lim(x→2) (x²-4)/(x-2)</p>
+        <input type="text" id="t3" placeholder="Resposta">
+    </div>
+
+    <button onclick="corrigirTeste()">Corrigir Teste</button>
+    <p id="resultadoTeste"></p>
+</section>
 
 <script>
-const conteudos = `
-<h2>Conteúdos do 12.º Ano</h2>
-<h3>1️⃣ Álgebra</h3>
-<p>Polinómios, Equações do 2.º grau, Fatorização</p>
-<p>Exemplo: x² - 5x + 6 = 0 → (x-2)(x-3)=0 → x=2 ou x=3</p>
-
-<h3>2️⃣ Funções e Gráficos</h3>
-<p>Funções lineares, quadráticas, exponenciais, logarítmicas</p>
-<p>Exemplo: f(x)=x²-4 → zeros: x=±2, vértice (0,-4)</p>
-
-<h3>3️⃣ Limites e Continuidade</h3>
-<p>Limite de função no ponto e no infinito. Função contínua sem buracos.</p>
-<p>Exemplo: lim(x→2) (x²-4)/(x-2) = 4</p>
-
-<h3>4️⃣ Derivadas</h3>
-<p>Derivada: taxa de variação de f(x)</p>
-<p>Exemplo: f(x)=x³-3x²+2x → f'(x)=3x²-6x+2</p>
-
-<h3>5️⃣ Integrais</h3>
-<p>Indefinida: ∫f(x)dx, Definida: ∫_a^b f(x)dx</p>
-<p>Exemplo: ∫(2x)dx = x² + C</p>
-
-<h3>6️⃣ Probabilidade e Estatística</h3>
-<p>Probabilidade simples, variáveis aleatórias, média, variância</p>
-<p>Exemplo: Probabilidade de tirar 3 ou 5 num dado = 2/6 = 1/3</p>
-
-<h3>7️⃣ Trigonometria</h3>
-<p>Funções seno, cosseno, tangente, identidades</p>
-<p>Exemplo: sin x = 1/2 → x=30° + 360°k</p>
-`;
-
-const exercicios = `
-<h2>Exercícios Interativos</h2>
-
-<div class="exercise">
-<p>Álgebra: Resolva x² - 7x + 10 = 0</p>
-<input type="text" id="ex1" placeholder="Resposta separada por vírgula">
-<button class="solve" onclick="checkExercise('ex1',['2','5'])">Ver Resolução</button>
-<div class="resultado" id="res_ex1"></div>
-</div>
-
-<div class="exercise">
-<p>Funções: zeros de f(x)=x²-6x+8</p>
-<input type="text" id="ex2" placeholder="Resposta separada por vírgula">
-<button class="solve" onclick="checkExercise('ex2',['2','4'])">Ver Resolução</button>
-<div class="resultado" id="res_ex2"></div>
-</div>
-
-<div class="exercise">
-<p>Limites: lim(x→3) (x²-9)/(x-3)</p>
-<input type="text" id="ex3" placeholder="Digite a resposta">
-<button class="solve" onclick="checkExercise('ex3',['6'])">Ver Resolução</button>
-<div class="resultado" id="res_ex3"></div>
-</div>
-
-`;
-
-const teste = `
-<h2>Simulação de Teste - Álgebra + Funções</h2>
-
-<div class="exercise">
-<p>1. x² - 5x + 6 = 0 → x = ?</p>
-<input type="text" id="t1" placeholder="Digite resposta separada por vírgula">
-</div>
-
-<div class="exercise">
-<p>2. f(x) = x² - 6x + 8 → zeros?</p>
-<input type="text" id="t2" placeholder="Digite resposta separada por vírgula">
-</div>
-
-<button onclick="checkTest()">Ver Resultado</button>
-<div class="resultado" id="resultadoTeste"></div>
-`;
-
-function showContent(section){
-  const main = document.getElementById('mainContent');
-  if(section==='conteudos') main.innerHTML=conteudos;
-  if(section==='exercicios') main.innerHTML=exercicios;
-  if(section==='teste') main.innerHTML=teste;
+function verEx1(){
+    let x1 = document.getElementById("ex1a").value;
+    let x2 = document.getElementById("ex1b").value;
+    let corretos = ["2","5"];
+    if ((x1 == corretos[0] && x2 == corretos[1]) || (x1 == corretos[1] && x2 == corretos[0])) {
+        document.getElementById("res1").innerText = "Correto! ✅";
+    } else {
+        document.getElementById("res1").innerText = "Errado ❌ Resposta correta: 2,5";
+    }
 }
 
-function checkExercise(id, correct){
-  const ans = document.getElementById(id).value.split(',').map(a=>a.trim());
-  const resDiv = document.getElementById('res_'+id);
-  let correctCount = 0;
-  correct.forEach(c=>{
-    if(ans.includes(c)) correctCount++;
-  });
-  if(correctCount===correct.length) resDiv.innerHTML='✅ Correto!';
-  else resDiv.innerHTML='❌ Incorreto. Tente novamente.';
+function verEx2(){
+    let x1 = document.getElementById("ex2a").value;
+    let x2 = document.getElementById("ex2b").value;
+    let corretos = ["2","4"];
+    if ((x1 == corretos[0] && x2 == corretos[1]) || (x1 == corretos[1] && x2 == corretos[0])) {
+        document.getElementById("res2").innerText = "Correto! ✅";
+    } else {
+        document.getElementById("res2").innerText = "Errado ❌ Resposta correta: 2,4";
+    }
 }
 
-function checkTest(){
-  const t1 = document.getElementById('t1').value.split(',').map(a=>a.trim());
-  const t2 = document.getElementById('t2').value.split(',').map(a=>a.trim());
-  let msg='';
-  msg += (t1.includes('2') && t1.includes('3')) ? 'Questão 1: ✅ Correta<br>' : 'Questão 1: ❌ Incorreta<br>';
-  msg += (t2.includes('2') && t2.includes('4')) ? 'Questão 2: ✅ Correta<br>' : 'Questão 2: ❌ Incorreta<br>';
-  document.getElementById('resultadoTeste').innerHTML=msg;
+function verEx3(){
+    let resp = document.getElementById("ex3").value;
+    if (resp == "6") {
+        document.getElementById("res3").innerText = "Correto! ✅";
+    } else {
+        document.getElementById("res3").innerText = "Errado ❌ Resposta correta: 6";
+    }
+}
+
+function corrigirTeste(){
+    let pontos = 0;
+    if ((document.getElementById("t1a").value == "2" && document.getElementById("t1b").value == "3") ||
+        (document.getElementById("t1a").value == "3" && document.getElementById("t1b").value == "2")) pontos++;
+    if ((document.getElementById("t2a").value == "1" && document.getElementById("t2b").value == "3") ||
+        (document.getElementById("t2a").value == "3" && document.getElementById("t2b").value == "1")) pontos++;
+    if (document.getElementById("t3").value == "4") pontos++;
+    document.getElementById("resultadoTeste").innerText = "Você acertou " + pontos + " de 3 perguntas.";
 }
 </script>
 
 </body>
 </html>
+
